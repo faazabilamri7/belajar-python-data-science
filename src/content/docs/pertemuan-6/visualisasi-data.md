@@ -58,6 +58,8 @@ pip install matplotlib seaborn plotly
 
 ### Import Library
 
+Sebelum membuat visualisasi, kita perlu import semua library yang diperlukan. Matplotlib adalah library dasar untuk plotting, Seaborn menyediakan style cantik dan plot statistik, sementara Pandas dan NumPy untuk manipulasi data.
+
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -75,6 +77,8 @@ plt.rcParams['font.size'] = 12
 ## 📈 Matplotlib: Library Dasar
 
 ### Struktur Dasar Plot
+
+Setiap plot di Matplotlib memiliki struktur dasar yang sama: membuat figure, plot data, menambahkan judul dan labels, dan menampilkan hasil. Ini adalah template yang akan kita gunakan berulang kali untuk berbagai jenis visualisasi.
 
 ```python
 import matplotlib.pyplot as plt
@@ -95,15 +99,17 @@ plt.show()                   # Tampilkan
 
 ### Line Plot
 
+Line plot digunakan untuk menampilkan trend atau hubungan antara dua variabel kontinu. Biasanya digunakan untuk time series data. Kita bisa plot multiple lines dalam satu figure dengan memberikan label berbeda pada setiap line.
+
 ```python
-# Data
+# Data - generate 100 points dari fungsi sin dan cos
 x = np.linspace(0, 10, 100)
 y1 = np.sin(x)
 y2 = np.cos(x)
 
 plt.figure(figsize=(12, 5))
 
-# Multiple lines
+# Multiple lines - plot dua fungsi dengan warna dan style berbeda
 plt.plot(x, y1, label='Sin(x)', color='blue', linewidth=2, linestyle='-')
 plt.plot(x, y2, label='Cos(x)', color='red', linewidth=2, linestyle='--')
 
@@ -117,12 +123,14 @@ plt.show()
 
 ### Scatter Plot
 
+Scatter plot menampilkan hubungan antara dua variabel numerik. Setiap point mewakili satu observasi. Scatter plot sangat berguna untuk melihat korelasi, outliers, dan pola-pola dalam data.
+
 ```python
-# Generate data
+# Generate data - membuat 100 data points dengan hubungan linear + noise
 np.random.seed(42)
 x = np.random.randn(100)
-y = x * 2 + np.random.randn(100) * 0.5
-colors = np.random.rand(100)
+y = x * 2 + np.random.randn(100) * 0.5  # y = 2x + noise untuk simulasi korelasi
+colors = np.random.rand(100)  # warna random untuk setiap point
 sizes = np.random.rand(100) * 200
 
 plt.figure(figsize=(10, 6))
@@ -136,14 +144,16 @@ plt.show()
 
 ### Bar Chart
 
+Bar chart digunakan untuk membandingkan nilai-nilai dari berbagai kategori. Sangat efektif untuk menampilkan data kategorikal dan memudahkan perbandingan antar kategori. Bar chart bisa vertical (standar) atau horizontal (untuk kategori dengan nama panjang).
+
 ```python
-# Data
+# Data - kategorical data dengan nilai numerik
 categories = ['A', 'B', 'C', 'D', 'E']
 values = [23, 45, 56, 78, 32]
 
 plt.figure(figsize=(10, 6))
 
-# Vertical bar
+# Vertical bar - batang tegak untuk setiap kategori, mudah untuk perbandingan
 plt.subplot(1, 2, 1)
 plt.bar(categories, values, color='steelblue', edgecolor='black')
 plt.title('Vertical Bar Chart')
@@ -162,6 +172,8 @@ plt.show()
 ```
 
 ### Grouped & Stacked Bar
+
+Grouped Bar Chart menampilkan multiple bars untuk setiap kategori, memungkinkan perbandingan antar grup. Stacked Bar Chart menumpuk bars untuk menunjukkan komposisi total. Mari kita buat Grouped dan Stacked Bar Chart:
 
 ```python
 # Data
@@ -198,14 +210,16 @@ plt.show()
 
 ### Histogram
 
+Histogram menampilkan distribusi dari satu variabel numerik. Kita membagi range data ke dalam bins dan menghitung frekuensi (jumlah data) di setiap bin. Histogram sangat berguna untuk memahami shape distribusi data (normal, skewed, bimodal, dll).
+
 ```python
-# Generate data
+# Generate data dari distribusi normal untuk contoh
 np.random.seed(42)
-data_normal = np.random.normal(100, 15, 1000)
+data_normal = np.random.normal(100, 15, 1000)  # mean=100, std=15, 1000 data points
 
 plt.figure(figsize=(12, 5))
 
-# Histogram biasa
+# Histogram biasa - menampilkan frekuensi di setiap bin
 plt.subplot(1, 2, 1)
 plt.hist(data_normal, bins=30, color='steelblue', edgecolor='white', alpha=0.7)
 plt.title('Histogram')
@@ -214,10 +228,10 @@ plt.ylabel('Frekuensi')
 plt.axvline(np.mean(data_normal), color='red', linestyle='--', label=f'Mean: {np.mean(data_normal):.1f}')
 plt.legend()
 
-# Histogram dengan KDE
+# Histogram dengan KDE (Kernel Density Estimation) - smooth curve untuk visualisasi distribusi
 plt.subplot(1, 2, 2)
 plt.hist(data_normal, bins=30, density=True, color='steelblue', edgecolor='white', alpha=0.7)
-# Add KDE manually
+# Add KDE manually - visualisasi smooth dari distribusi
 from scipy import stats
 x = np.linspace(50, 150, 100)
 plt.plot(x, stats.norm.pdf(x, np.mean(data_normal), np.std(data_normal)), 'r-', linewidth=2)
@@ -230,6 +244,8 @@ plt.show()
 ```
 
 ### Pie Chart
+
+Pie Chart adalah visualisasi yang berguna untuk menunjukkan komposisi dan proporsi dari suatu whole (total 100%). Pie Chart paling efektif ketika ada beberapa kategori (tidak lebih dari 5-6) dan saat kita ingin membandingkan bagian dari keseluruhan. Mari kita buat Pie Chart:
 
 ```python
 # Data
@@ -247,6 +263,8 @@ plt.show()
 ```
 
 ### Box Plot
+
+Box Plot adalah visualisasi yang sangat berguna untuk melihat distribusi data, median, quartiles, dan outliers dalam satu plot. Box plot memudahkan perbandingan distribusi antar grup. Mari kita buat Box Plot:
 
 ```python
 # Generate data
@@ -272,6 +290,8 @@ plt.show()
 ```
 
 ### Subplots
+
+Subplots memungkinkan kita membuat multiple plots dalam satu figure. Ini sangat berguna ketika kita ingin membandingkan visualisasi yang berbeda atau melihat different aspects dari data dalam satu pandangan. Mari kita buat subplot dengan multiple plots:
 
 ```python
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
@@ -308,6 +328,8 @@ Seaborn dibangun di atas Matplotlib dengan:
 
 ### Setup Seaborn
 
+Seaborn memiliki banyak style dan color palette yang bisa kita gunakan untuk membuat visualisasi lebih menarik dan profesional. Setup Seaborn memungkinkan kita mengatur tema dan style untuk semua plots. Mari kita setup Seaborn:
+
 ```python
 import seaborn as sns
 
@@ -317,6 +339,8 @@ sns.set_palette("husl")
 ```
 
 ### Distribution Plots
+
+Distribution Plots menunjukkan distribusi data numerik dengan berbagai cara - histogram, KDE (Kernel Density Estimate), atau keduanya. Distribution plots berguna untuk memahami shape, center, dan spread dari data. Mari kita buat distribution plots:
 
 ```python
 # Load sample data
@@ -345,6 +369,8 @@ plt.show()
 ```
 
 ### Categorical Plots
+
+Categorical Plots menunjukkan hubungan antara variabel categorical dan numerik. Ada berbagai jenis categorical plot (strip, swarm, box, violin) yang berguna untuk exploratory analysis. Mari kita buat categorical plots:
 
 ```python
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
@@ -379,6 +405,8 @@ plt.show()
 
 ### Relational Plots
 
+Relational Plots menunjukkan hubungan antara dua atau lebih variabel numerik. Scatter plot adalah relational plot yang paling common. Relational plots berguna untuk menemukan correlation dan pattern antara variabel. Mari kita buat relational plots:
+
 ```python
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
@@ -400,6 +428,8 @@ plt.show()
 
 ### Heatmap
 
+Heatmap adalah cara yang sangat efektif untuk memvisualisasikan correlation matrix atau data 2D lainnya menggunakan warna. Warna yang lebih gelap/cerah menunjukkan nilai yang lebih tinggi/rendah. Heatmap sangat berguna untuk EDA correlation analysis. Mari kita buat heatmap:
+
 ```python
 # Correlation heatmap
 plt.figure(figsize=(10, 8))
@@ -416,6 +446,8 @@ plt.show()
 
 ### Pair Plot
 
+Pair Plot adalah teknik untuk melihat semua pairwise relationships dalam dataset yang berisi multiple variabel numerik. Pair Plot membuat scatter plot untuk setiap pair variabel dan histogram untuk diagonal. Ini sangat berguna untuk EDA awal. Mari kita buat pair plot:
+
 ```python
 # Pair plot untuk melihat semua hubungan
 iris = sns.load_dataset("iris")
@@ -425,6 +457,8 @@ plt.show()
 ```
 
 ### Joint Plot
+
+Joint Plot menggabungkan scatter plot untuk relationship antara dua variabel dengan histogram untuk masing-masing variabel di margins. Joint plot berguna untuk deep dive analysis hubungan antara two specific variables. Mari kita buat joint plot:
 
 ```python
 # Joint plot untuk 2 variabel
@@ -436,6 +470,8 @@ plt.show()
 ```
 
 ### FacetGrid
+
+FacetGrid adalah teknik untuk membuat multiple plots berdasarkan nilai dari categorical variable. Ini memungkinkan kita membuat side-by-side comparison untuk different groups. FacetGrid sangat powerful untuk exploratory analysis. Mari kita buat FacetGrid:
 
 ```python
 # Multiple plots berdasarkan kategori
@@ -496,6 +532,8 @@ plt.ylim(0, None)  # Mulai dari 0
 
 ### Template EDA Visual
 
+Template ini adalah workflow standar untuk melakukan EDA visualization secara systematic. Dengan mengikuti template ini, kita bisa melakukan EDA yang comprehensive untuk dataset apapun. Mari kita lihat template EDA:
+
 ```python
 def visualize_numeric(df, column):
     """Visualisasi untuk kolom numerik"""
@@ -535,6 +573,8 @@ def visualize_categorical(df, column):
 ```
 
 ### Menyimpan Visualisasi
+
+Setelah membuat visualisasi yang sempurna, kita ingin menyimpannya dalam format high-quality untuk laporan atau presentasi. Matplotlib menyediakan berbagai format (PNG, PDF, SVG) dengan kontrol resolution dan DPI. Mari kita simpan visualisasi:
 
 ```python
 # Simpan dengan kualitas tinggi

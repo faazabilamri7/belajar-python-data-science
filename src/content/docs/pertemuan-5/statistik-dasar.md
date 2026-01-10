@@ -42,9 +42,11 @@ Buka Google Colab di: [colab.research.google.com](https://colab.research.google.
 
 ### 1. Mean (Rata-rata)
 
-Jumlah semua nilai dibagi jumlah data.
+Mean (rata-rata) adalah ukuran pemusatan yang paling umum digunakan. Mean dihitung dengan menjumlahkan semua nilai dan membaginya dengan jumlah data. Mean berguna untuk data yang berdistribusi normal, tetapi sensitif terhadap outlier (nilai ekstrem).
 
 $$\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}$$
+
+Mari kita hitung mean menggunakan berbagai metode:
 
 ```python
 import numpy as np
@@ -67,7 +69,7 @@ print(f"Mean: {mean_numpy:.2f}")  # 86.30
 
 ### 2. Median (Nilai Tengah)
 
-Nilai yang membagi data menjadi dua bagian sama besar.
+Median adalah nilai yang membagi dataset menjadi dua bagian sama besar - 50% data di bawahnya dan 50% di atasnya. Median lebih robust terhadap outlier dibandingkan mean, sehingga lebih baik digunakan ketika ada nilai ekstrem dalam data:
 
 ```python
 data = [85, 90, 78, 92, 88, 95, 70, 85, 91, 89]
@@ -85,6 +87,8 @@ print(f"Median (dengan outlier): {np.median(data_dengan_outlier):.2f}")  # 88.50
 - ✅ Data ordinal
 
 ### 3. Mode (Nilai yang Paling Sering Muncul)
+
+Mode adalah nilai yang paling sering muncul dalam dataset. Mode sangat berguna untuk data kategorikal (seperti warna, kategori) maupun data numerik. Mari kita cari mode dari dataset:
 
 ```python
 from scipy import stats
@@ -106,11 +110,7 @@ print(f"Mode kategori: {mode_kat}")  # A
 
 ### Perbandingan Mean, Median, Mode
 
-| Distribusi        | Mean vs Median       |
-| ----------------- | -------------------- |
-| Normal (simetris) | Mean ≈ Median ≈ Mode |
-| Right-skewed      | Mean > Median        |
-| Left-skewed       | Mean < Median        |
+Perbandingan antara mean, median, dan mode sangat berguna untuk memahami karakteristik distribusi data. Mari kita lihat visualisasinya:
 
 ```python
 # Visualisasi
@@ -135,7 +135,7 @@ plt.show()
 
 ### 1. Range
 
-Selisih nilai maksimum dan minimum.
+Range adalah ukuran penyebaran paling sederhana - hanya selisih antara nilai maksimum dan minimum. Range mudah dihitung tetapi sensitif terhadap outlier:
 
 ```python
 data = [85, 90, 78, 92, 88, 95, 70, 85, 91, 89]
@@ -146,7 +146,7 @@ print(f"Range: {range_val}")  # 25
 
 ### 2. Variance (Varians)
 
-Rata-rata dari kuadrat selisih setiap nilai dengan mean.
+Variance mengukur rata-rata dari kuadrat selisih setiap nilai dengan mean. Variance menunjukkan seberapa menyebar data dari mean - semakin besar variance, semakin spread out datanya. Mari kita hitung variance:
 
 $$\sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}$$
 
@@ -164,7 +164,7 @@ print(f"Variance (sample): {var_sample:.2f}")
 
 ### 3. Standard Deviation (Simpangan Baku)
 
-Akar kuadrat dari variance. Lebih mudah diinterpretasi karena satuan sama dengan data.
+Standard Deviation adalah akar kuadrat dari variance. Standard Deviation lebih mudah diinterpretasi karena satuan dan skala-nya sama dengan data asli. Mari kita hitung Standard Deviation:
 
 $$\sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}}$$
 
@@ -177,7 +177,7 @@ print(f"Standard Deviation: {std:.2f}")
 
 ### 4. Interquartile Range (IQR)
 
-Range antara kuartil pertama (Q1) dan kuartil ketiga (Q3).
+Interquartile Range adalah range antara kuartil pertama (Q1, 25th percentile) dan kuartil ketiga (Q3, 75th percentile). IQR lebih robust terhadap outlier dibandingkan range karena hanya mengukur middle 50% dari data. Mari kita hitung kuartil dan IQR:
 
 ```python
 data = [85, 90, 78, 92, 88, 95, 70, 85, 91, 89]
@@ -312,6 +312,8 @@ print(f"P(genap) = {probabilitas:.2f}")  # 0.50
 
 ### Aturan Probabilitas
 
+Probabilitas memiliki beberapa aturan dasar yang penting untuk dipahami. Aturan-aturan ini membantu kita menghitung probabilitas event yang lebih complex. Mari kita lihat aturan probabilitas:
+
 ```python
 # P(A atau B) = P(A) + P(B) - P(A dan B)
 # Contoh: P(genap ATAU > 3)
@@ -324,6 +326,8 @@ print(f"P(genap atau > 3) = {P_genap_atau_lebih_3:.2f}")  # 0.67
 ```
 
 ### Distribusi Probabilitas
+
+Distribusi Probabilitas mendeskripsikan bagaimana probabilitas terdistribusi di antara semua kemungkinan value dari suatu random variable. Normal Distribution adalah yang paling common, tetapi ada berbagai jenis distribusi. Mari kita lihat distribusi probabilitas:
 
 ```python
 from scipy import stats
@@ -379,6 +383,8 @@ print(f"Tidak berkorelasi: r = {r_none:.3f}")
 
 ### Visualisasi Korelasi
 
+Untuk memvisual correlation antara variabel, kita bisa menggunakan berbagai teknik. Scatter plot sangat berguna untuk melihat linear relationship, sedangkan correlation matrix memberikan nilai numeric. Mari kita visualisasi korelasi:
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -398,6 +404,8 @@ plt.show()
 ```
 
 ### Correlation Matrix
+
+Correlation Matrix adalah tabel yang menunjukkan correlation coefficient antara setiap pair variabel. Correlation matrix memudahkan kita melihat correlation relationships dalam satu pandangan. Mari kita hitung dan visualisasi correlation matrix:
 
 ```python
 import pandas as pd
@@ -469,6 +477,8 @@ print(f"Z-scores: {z_scores}")
 ---
 
 ## 📝 Statistik Deskriptif dengan Pandas
+
+Pandas menyediakan banyak fungsi berguna untuk menghitung statistik deskriptif dengan cepat. Menggunakan built-in methods dari pandas lebih convenient dan efficient dibanding menghitung manual. Mari kita gunakan pandas untuk statistik deskriptif:
 
 ```python
 import pandas as pd

@@ -291,6 +291,8 @@ Mengurangi dimensi dengan menjaga variance.
 
 ### 1. Define Problem
 
+Langkah pertama adalah clearly define masalah apa yang ingin kita selesaikan. Ini termasuk menentukan target variable (apa yang ingin diprediksi), jenis problem (regression atau classification), dan metrik apa yang akan digunakan untuk mengukur sukses.
+
 ```python
 # Pertanyaan yang harus dijawab:
 # - Apa yang ingin diprediksi? (target variable)
@@ -299,32 +301,36 @@ Mengurangi dimensi dengan menjaga variance.
 # - Data apa yang tersedia?
 
 problem_type = "classification"  # atau "regression"
-target = "churn"  # kolom yang ingin diprediksi
+target = "churn"  # kolom yang ingin diprediksi - apakah customer churn atau tidak
 metric = "accuracy"  # atau "rmse" untuk regression
 ```
 
 ### 2. Collect & Explore Data
 
+Setelah define problem, kita perlu load data dan explore untuk memahami struktur dan kualitas data. Gunakan functions seperti `head()`, `info()`, `describe()` untuk lihat gambaran awal dataset sebelum preprocessing.
+
 ```python
 import pandas as pd
 
-# Load data
+# Load data - bisa dari CSV, database, atau API
 df = pd.read_csv('data.csv')
 
-# Explore
-print(df.shape)
-print(df.info())
-print(df.describe())
-print(df['target'].value_counts())
+# Explore - pahami struktur dan karakteristik data
+print(df.shape)               # Berapa baris dan kolom
+print(df.info())              # Info tipe data dan missing values
+print(df.describe())          # Statistik deskriptif (mean, std, min, max, dll)
+print(df['target'].value_counts())  # Distribusi target variable
 ```
 
 ### 3. Prepare Data
 
+Sebelum training model, data perlu di-prepare: handle missing values, encode categorical variables, dan scale numeric features. Ini sangat penting karena model ML membutuhkan input yang bersih dan normalized.
+
 ```python
-# Handle missing values
+# Handle missing values - isi dengan mean dari kolom tersebut
 df.fillna(df.mean(), inplace=True)
 
-# Encode categorical
+# Encode categorical - convert kategori teks jadi numerical (one-hot encoding)
 df = pd.get_dummies(df, columns=['category_column'])
 
 # Scale features
@@ -335,43 +341,52 @@ df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
 
 ### 4. Split Data
 
+Split data menjadi training set (untuk melatih model) dan test set (untuk evaluasi). Ini penting agar kita bisa mengukur performance pada data yang belum pernah dilihat model sebelumnya (generalization).
+
 ```python
 from sklearn.model_selection import train_test_split
 
-# Pisahkan features dan target
-X = df.drop('target', axis=1)
-y = df['target']
+# Pisahkan features (X) dan target (y)
+X = df.drop('target', axis=1)  # Features - variabel yang digunakan untuk prediksi
+y = df['target']                # Target - variabel yang ingin diprediksi
 
-# Split: 80% training, 20% testing
+# Split: 80% training, 20% testing - standard split ratio
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=42  # random_state untuk reproducibility
 )
 
-print(f"Training set: {X_train.shape}")
-print(f"Test set: {X_test.shape}")
+print(f"Training set: {X_train.shape}")  # Jumlah training data
+print(f"Test set: {X_test.shape}")        # Jumlah test data
 ```
 
 ### 5. Train Model
 
+Langkah ini adalah di mana model "belajar" dari training data. Model akan adjust parameternya untuk meminimalkan prediction error pada training set.
+
 ```python
 from sklearn.ensemble import RandomForestClassifier
 
-# Inisialisasi model
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+# Inisialisasi model - set hyperparameters
+model = RandomForestClassifier(n_estimators=100, random_state=42)  # 100 trees dalam random forest
 
-# Training
-model.fit(X_train, y_train)
+# Training - model belajar dari training data
+model.fit(X_train, y_train)  # Fit model ke training data
 ```
 
 ### 6. Evaluate Model
 
+Setelah model dilatih, evaluasi performance-nya pada test set (data yang belum pernah dilihat). Gunakan berbagai metrik untuk mendapatkan gambaran lengkap tentang seberapa baik model bekerja.
+
 ```python
 from sklearn.metrics import accuracy_score, classification_report
 
-# Prediksi
+# Prediksi - gunakan trained model untuk prediksi pada test data
 y_pred = model.predict(X_test)
 
-# Evaluasi
+# Evaluasi - ukur seberapa baik prediksi kita
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.4f}")  # Persentase prediksi yang benar
+print(classification_report(y_test, y_pred))  # Report detail: precision, recall, F1-score
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.4f}")
 print(classification_report(y_test, y_pred))
@@ -468,6 +483,8 @@ score = model.score(X_test, y_test)
 
 ### Contoh Berbagai Model
 
+Sekarang mari kita lihat berbagai algoritma machine learning yang umum digunakan dan kode untuk melatihnya. Setiap algoritma memiliki kelebihan dan kekurangan, dan pilihan algoritma tergantung pada problem type dan karakteristik data:
+
 ```python
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -493,6 +510,8 @@ for name, model in models.items():
 ---
 
 ## 📝 Praktik: Klasifikasi Sederhana
+
+Sekarang mari kita praktik dengan membuat model klasifikasi sederhana. Kita akan menggunakan dataset Iris yang populer dan melakukan supervised learning end-to-end. Mari kita praktik:
 
 ```python
 import pandas as pd

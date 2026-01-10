@@ -46,6 +46,8 @@ Buka Google Colab di: [colab.research.google.com](https://colab.research.google.
 
 ### 1. Load dan Inspeksi Data
 
+Langkah pertama dalam EDA adalah meload data dan melakukan inspeksi awal. Kita perlu memahami shape dataset (berapa baris dan kolom), tipe data setiap kolom, dan melihat beberapa baris pertama untuk memahami struktur data:
+
 ```python
 import pandas as pd
 import numpy as np
@@ -67,6 +69,8 @@ print(f"\n5 Data Pertama:\n{df.head()}")
 
 ### 2. Ringkasan Statistik
 
+Untuk mendapatkan pemahaman yang lebih dalam tentang data kita, kita perlu menghitung statistik deskriptif. Ini memberikan informasi tentang mean, median, standard deviation, dan distribusi data. Mari kita lihat statistik deskriptif:
+
 ```python
 # Untuk kolom numerik
 print(df.describe())
@@ -80,8 +84,7 @@ print(df.info())
 
 ### 3. Cek Missing Values
 
-![Missing Values Example](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Titanic_Survivors_by_Age.svg/640px-Titanic_Survivors_by_Age.svg.png)
-_Contoh: Dataset Titanic sering memiliki missing values_
+Missing values (data yang hilang atau tidak lengkap) adalah masalah umum dalam dataset real-world. Kita perlu mengidentifikasi ada missing values di mana, berapa banyak, dan dalam persentase berapa. Kita bisa visualisasikan missing values untuk lebih mudah melihat pola-nya. Mari kita identifikasi missing values:
 
 ```python
 # Jumlah missing values per kolom
@@ -100,6 +103,8 @@ plt.show()
 ```
 
 ### 4. Distribusi Data
+
+Memahami distribusi data sangat penting untuk mendeteksi anomali dan outliers. Kita bisa menggunakan histogram untuk melihat distribusi numerik, dan boxplot untuk melihat outliers. Mari kita visualisasikan distribusi data:
 
 ```python
 # Histogram untuk kolom numerik
@@ -124,6 +129,8 @@ plt.show()
 
 ### 5. Analisis Kategorikal
 
+Untuk kolom kategorikal (text/categorical), kita perlu melihat value counts (berapa banyak setiap kategori), dan visualisasinya menggunakan bar chart atau pie chart. Ini membantu kita memahami distribusi kategori dan jika ada imbalance. Mari kita analisis kategorikal:
+
 ```python
 # Value counts
 print(df['kategori'].value_counts())
@@ -144,6 +151,8 @@ plt.show()
 ```
 
 ### 6. Korelasi Antar Variabel
+
+Korelasi menunjukkan hubungan antara dua variabel numerik. Korelasi tinggi (positif atau negatif) menunjukkan hubungan yang kuat, sedangkan korelasi rendah menunjukkan hubungan yang lemah. Kita bisa menggunakan correlation matrix dan heatmap untuk visualisasinya. Mari kita analisis korelasi:
 
 ```python
 # Correlation matrix
@@ -179,6 +188,8 @@ Masalah umum dalam data:
 
 ### Identifikasi Missing Values
 
+Ada berbagai cara data menunjukkan missing values - bisa sebagai 'NA', 'N/A', string kosong, atau angka seperti -1, 999. Kita harus mendefinisikan ini ketika loading data agar pandas bisa mengenali missing values dengan benar:
+
 ```python
 # Berbagai representasi missing values
 missing_indicators = ['NA', 'N/A', '-', '', ' ', 'null', 'None', '?']
@@ -193,7 +204,11 @@ print(f"\nTotal missing: {df.isnull().sum().sum()}")
 
 ### Strategi Menangani Missing Values
 
+Ada berbagai strategi untuk menangani missing values tergantung pada konteks dan persentase missing data. Mari kita lihat berbagai strategi:
+
 #### 1. Hapus Baris/Kolom
+
+Strategi paling sederhana adalah menghapus baris atau kolom yang memiliki missing values. Ini cocok jika jumlah missing tidak terlalu banyak:
 
 ```python
 # Hapus baris dengan missing values
@@ -209,6 +224,8 @@ df_clean = df.drop(columns=cols_to_drop)
 ```
 
 #### 2. Imputation (Pengisian)
+
+Daripada menghapus, kita bisa mengisi missing values dengan nilai tertentu. Ada berbagai cara imputation tergantung tipe data dan distribusinya. Mari kita lihat berbagai teknik imputation:
 
 ```python
 # Isi dengan nilai konstan
@@ -232,6 +249,8 @@ df['kolom'].fillna(method='bfill', inplace=True)
 
 #### 3. Imputation per Grup
 
+Untuk data yang terstruktur per grup (misalnya gender, kategori), kita bisa melakukan imputation per grup. Ini lebih akurat karena mempertimbangkan karakteristik grup masing-masing:
+
 ```python
 # Mean imputation per kategori
 df['umur'] = df.groupby('gender')['umur'].transform(
@@ -254,6 +273,8 @@ df['umur'] = df.groupby('gender')['umur'].transform(
 
 ## 🔄 Menangani Duplikat
 
+Data duplikat (baris yang identik atau hampir identik) dapat menyebabkan bias dalam analisis dan modeling. Kita harus mengidentifikasi dan menghapus duplikat. Mari kita lihat bagaimana mendeteksi dan menghapus duplikat:
+
 ```python
 # Cek duplikat
 print(f"Jumlah duplikat: {df.duplicated().sum()}")
@@ -275,11 +296,15 @@ df_clean = df.drop_duplicates(keep='last')
 
 ## 📊 Menangani Outliers
 
+Outlier adalah nilai yang sangat berbeda dari mayoritas data. Outlier bisa disebabkan oleh error pengukuran, data entry error, atau memang ada nilai ekstrem yang legitimate. Kita harus mengidentifikasi outlier dan memutuskan apa yang akan kita lakukan dengannya:
+
 ### Apa itu Outlier?
 
 Outlier adalah nilai yang sangat berbeda dari mayoritas data.
 
 ### Deteksi Outliers
+
+Mari kita lihat beberapa metode untuk mendeteksi outlier:
 
 #### 1. Metode IQR (Interquartile Range)
 
@@ -303,6 +328,8 @@ print(f"Range normal: {lb:.2f} - {ub:.2f}")
 
 #### 2. Metode Z-Score
 
+Z-Score mengukur berapa banyak standard deviation nilai dari mean. Nilai dengan Z-Score > 3 biasanya dianggap outlier. Mari kita deteksi outlier menggunakan Z-Score:
+
 ```python
 from scipy import stats
 
@@ -316,6 +343,8 @@ print(f"Outliers: {len(outliers)}")
 ```
 
 #### 3. Visualisasi Boxplot
+
+Boxplot adalah visualisasi yang sangat berguna untuk mendeteksi outlier secara visual. Titik-titik di luar whisker (garis panjang) pada boxplot adalah outlier. Mari kita visualisasi outlier dengan boxplot:
 
 ```python
 plt.figure(figsize=(12, 4))
@@ -333,6 +362,8 @@ plt.show()
 ```
 
 ### Menangani Outliers
+
+Ada beberapa strategi untuk menangani outlier - kita bisa menghapusnya, membatasinya dengan capping, atau mentransformasi mereka. Strategi mana yang kita pilih tergantung pada konteks dan jenis outlier:
 
 ```python
 # 1. Hapus outliers
@@ -359,6 +390,8 @@ df['harga_log'] = np.log1p(df['harga'])  # log(1 + x)
 
 ### Mengubah Tipe Data
 
+Mengubah tipe data adalah langkah penting untuk memastikan pandas memperlakukan kolom dengan benar. Misalnya, kolom tanggal harus bertipe datetime, bukan string. Mari kita ubah tipe data:
+
 ```python
 # String ke datetime
 df['tanggal'] = pd.to_datetime(df['tanggal'])
@@ -371,6 +404,8 @@ df['harga'] = pd.to_numeric(df['harga'], errors='coerce')  # error jadi NaN
 ```
 
 ### Feature Engineering dari Datetime
+
+Datetime columns dapat memberikan informasi tambahan yang berguna untuk modeling. Kita bisa extract year, month, day, day-of-week, quarter dari datetime, dan ini dapat menjadi features yang powerful. Mari kita lakukan feature engineering dari datetime:
 
 ```python
 df['tanggal'] = pd.to_datetime(df['tanggal'])
@@ -386,6 +421,8 @@ df['is_weekend'] = df['tanggal'].dt.dayofweek >= 5
 ```
 
 ### String Cleaning
+
+Text data sering memiliki inconsistencies seperti extra spaces, inconsistent casing, special characters. String cleaning memastikan text data consistent dan bersih sebelum digunakan untuk modeling. Mari kita clean string data:
 
 ```python
 # Hapus spasi berlebih
@@ -403,6 +440,8 @@ df['kode_pos'] = df['alamat'].str.extract(r'(\d{5})')
 ```
 
 ### Binning (Kategorisasi Numerik)
+
+Binning adalah teknik untuk mengkonversi continuous numerik variable menjadi categorical variable dengan membaginya ke dalam bins atau ranges. Ini berguna ketika kita ingin menemukan pattern atau ketika model kita lebih cocok dengan categorical input. Mari kita lakukan binning:
 
 ```python
 # Cut - interval sama
@@ -423,6 +462,8 @@ df['income_quartile'] = pd.qcut(
 ---
 
 ## 📝 Template EDA
+
+Berikut adalah template atau checklist standar untuk melakukan EDA yang comprehensive. Dengan mengikuti template ini, kita tidak akan melewatkan aspek penting dari data. Mari kita lihat template EDA:
 
 ```python
 import pandas as pd
@@ -487,6 +528,8 @@ def eda_report(df):
 ---
 
 ## 📊 Visualisasi EDA
+
+Visualisasi adalah bagian krusial dari EDA. Dengan visualisasi yang tepat, kita bisa menemukan pattern, outliers, dan relationships yang tidak terlihat dari angka-angka raw. Mari kita buat berbagai visualisasi untuk EDA:
 
 ```python
 def plot_eda(df, target=None):

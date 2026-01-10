@@ -42,6 +42,8 @@ Google Colab adalah platform GRATIS dari Google yang menyediakan:
 
 ### Tips Penting di Colab
 
+Sebelum mulai coding, cek apakah kamu sudah di Google Colab environment. Di Colab, hampir semua library ML sudah pre-installed, jadi tidak perlu install manual.
+
 ```python
 # Cek apakah kamu di Google Colab
 import sys
@@ -69,6 +71,8 @@ Dataset ini berisi data penumpang Titanic dan kita akan memprediksi siapa yang s
 Ada 2 cara mudah untuk load Titanic dataset:
 
 **Cara 1: Langsung dari Seaborn (Paling Mudah!)**
+
+Cara paling mudah adalah load dataset langsung dari Seaborn, yang sudah menyediakan berbagai dataset populer untuk belajar ML. Tidak perlu download atau upload file apapun!
 
 ```python
 import seaborn as sns
@@ -170,6 +174,8 @@ Proporsi prediksi yang benar dari total prediksi.
 
 $$Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$$
 
+Accuracy adalah metrik paling sederhana - menunjukkan persentase prediksi yang benar. Namun, metrik ini tidak selalu reliable untuk dataset yang imbalanced. Mari kita hitung accuracy untuk model kita:
+
 ```python
 from sklearn.metrics import accuracy_score
 
@@ -187,6 +193,8 @@ print(f"Accuracy: {accuracy:.4f}")
 Dari semua prediksi positif, berapa yang benar-benar positif?
 
 $$Precision = \frac{TP}{TP + FP}$$
+
+Precision mengukur seberapa akurat prediksi positif kita. Precision tinggi berarti ketika model memprediksi "positif", biasanya benar. Mari kita hitung precision:
 
 ```python
 from sklearn.metrics import precision_score
@@ -206,6 +214,8 @@ Dari semua actual positif, berapa yang berhasil diprediksi positif?
 
 $$Recall = \frac{TP}{TP + FN}$$
 
+Recall mengukur seberapa banyak dari semua kasus positif yang berhasil terdeteksi. Recall tinggi berarti model tidak melewatkan banyak positive cases. Mari kita hitung recall:
+
 ```python
 from sklearn.metrics import recall_score
 
@@ -224,6 +234,8 @@ Harmonic mean dari Precision dan Recall.
 
 $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 
+F1-Score adalah metrik yang bagus ketika kita ingin balance antara precision dan recall, terutama untuk dataset yang imbalanced. Mari kita hitung F1-Score:
+
 ```python
 from sklearn.metrics import f1_score
 
@@ -237,6 +249,8 @@ print(f"F1 Score: {f1:.4f}")
 - ✅ Butuh balance antara precision dan recall
 
 ### Classification Report
+
+Laporan klasifikasi (Classification Report) menyajikan semua metrik penting (Precision, Recall, F1-Score) dalam satu tabel yang rapi dan mudah dibaca. Ini sangat berguna untuk mendapatkan overview menyeluruh tentang performa model kita:
 
 ```python
 from sklearn.metrics import classification_report
@@ -302,6 +316,8 @@ Rata-rata absolute error.
 
 $$MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$$
 
+MAE adalah metrik regression yang mengukur rata-rata selisih absolut antara prediksi dan nilai actual. MAE mudah diinterpretasi karena satuan sama dengan target variable. Semakin kecil MAE, semakin akurat prediksi model:
+
 ```python
 from sklearn.metrics import mean_absolute_error
 
@@ -317,6 +333,8 @@ Rata-rata squared error.
 
 $$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$$
 
+MSE adalah metrik regression yang menghitung rata-rata kuadrat error. Dengan mengkuadratkan error, MSE memberikan penalti lebih berat untuk error yang besar. Ini berguna ketika error besar lebih problematic daripada error kecil:
+
 ```python
 from sklearn.metrics import mean_squared_error
 
@@ -330,6 +348,8 @@ Akar dari MSE, satuan sama dengan target.
 
 $$RMSE = \sqrt{MSE}$$
 
+RMSE adalah versi "ditarik akar" dari MSE, sehingga satuan dan interpretasinya sama dengan target variable kita. RMSE sering digunakan karena lebih intuitive dan menunjukkan rata-rata error dalam unit yang original. Mari kita hitung RMSE:
+
 ```python
 import numpy as np
 
@@ -340,6 +360,8 @@ print(f"RMSE: {rmse:.4f}")
 ### R² Score (Coefficient of Determination)
 
 Proporsi variance yang dijelaskan oleh model.
+
+R² Score mengukur seberapa baik model menjelaskan variasi dalam target variable. R² berkisar dari 0 sampai 1, dimana 1 berarti perfect fit. R² juga sering diinterpretasi sebagai "berapa persen variance target yang dijelaskan oleh model". Mari kita hitung R² Score:
 
 ```python
 from sklearn.metrics import r2_score
@@ -364,6 +386,10 @@ Single train-test split bisa memberikan hasil yang bervariasi. Cross-validation 
 
 ### K-Fold Cross-Validation
 
+K-Fold Cross-Validation adalah teknik yang membagi data menjadi k bagian, kemudian melakukan training dan testing sebanyak k kali dengan fold yang berbeda setiap kali. Ini memberikan estimasi performa yang lebih reliable dan stabil dibanding single train-test split.
+
+Berikut ilustrasi bagaimana K-Fold bekerja:
+
 ```
 Data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -375,6 +401,8 @@ Fold 5: Train=[1-8], Test=[9-10]
 
 Final Score = Average of 5 folds
 ```
+
+Sekarang mari kita implementasi K-Fold Cross-Validation dalam kode:
 
 ```python
 from sklearn.model_selection import cross_val_score
@@ -391,7 +419,7 @@ print(f"Std: {scores.std():.4f}")
 
 ### Stratified K-Fold
 
-Mempertahankan proporsi kelas di setiap fold (penting untuk imbalanced data).
+Untuk dataset yang imbalanced (misalnya 90% class 0 dan 10% class 1), regular K-Fold bisa menghasilkan fold yang tidak representative. Stratified K-Fold mengatasi ini dengan mempertahankan proporsi kelas di setiap fold, sehingga setiap fold adalah representative dari keseluruhan dataset:
 
 ```python
 from sklearn.model_selection import StratifiedKFold
@@ -401,6 +429,8 @@ scores = cross_val_score(model, X, y, cv=skf, scoring='accuracy')
 ```
 
 ### Cross-Validation untuk Multiple Metrics
+
+Kadang kita ingin mengevaluasi model menggunakan multiple metrics sekaligus (accuracy, precision, recall, f1). Fungsi `cross_validate` memungkinkan kita melakukan ini dengan lebih efficient. Mari kita evaluasi model dengan multiple metrics:
 
 ```python
 from sklearn.model_selection import cross_validate
@@ -424,7 +454,7 @@ for metric in scoring:
 
 ### Grid Search
 
-Mencoba semua kombinasi hyperparameter.
+Grid Search adalah teknik brute-force untuk menemukan hyperparameter terbaik dengan mencoba semua kombinasi hyperparameter yang kita specify. Meskipun computational expensive, Grid Search dapat menemukan kombinasi optimal dengan pasti. Mari kita gunakan GridSearchCV untuk mencari hyperparameter terbaik:
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -459,7 +489,7 @@ y_pred = best_model.predict(X_test)
 
 ### Random Search
 
-Mencoba kombinasi random dari hyperparameter (lebih efisien untuk ruang pencarian besar).
+Random Search adalah alternatif yang lebih efisien untuk Grid Search, terutama ketika hyperparameter space sangat besar. Daripada mencoba semua kombinasi, Random Search mencoba kombinasi random dengan jumlah yang kita specify. Ini sering menemukan kombinasi yang baik dengan computational cost yang jauh lebih rendah. Mari kita gunakan RandomizedSearchCV:
 
 ```python
 from sklearn.model_selection import RandomizedSearchCV
@@ -496,6 +526,8 @@ print(f"Best Score: {random_search.best_score_:.4f}")
 
 ### Tree-based Models
 
+Untuk tree-based models seperti Decision Tree, Random Forest, Gradient Boosting, kita bisa mengakses feature importance langsung dari model. Feature importance menunjukkan seberapa penting setiap feature dalam membuat prediksi. Feature dengan importance tinggi berkontribusi lebih banyak terhadap prediksi model. Mari kita hitung dan visualisasi feature importance:
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -518,6 +550,8 @@ plt.show()
 ```
 
 ### Permutation Importance
+
+Permutation Importance adalah model-agnostic technique yang bisa digunakan untuk semua jenis model (tidak hanya tree-based). Teknik ini mengevaluasi pentingnya feature dengan melihat seberapa banyak performa model turun ketika nilai feature di-shuffle (diacak). Feature yang lebih penting akan menyebabkan performa turun lebih signifikan. Mari kita hitung Permutation Importance:
 
 ```python
 from sklearn.inspection import permutation_importance
@@ -548,6 +582,8 @@ Kita akan menggunakan **Titanic Dataset** - dataset paling populer untuk belajar
 
 ### Langkah 1: Setup & Load Data
 
+Langkah pertama adalah mengimport semua library yang kita butuhkan. Di Google Colab, semua library populer seperti scikit-learn, pandas, numpy, matplotlib sudah terinstall, jadi kita tidak perlu melakukan instalasi. Mari kita import semua library yang diperlukan:
+
 ```python
 # ============================================
 # STEP 1: IMPORT LIBRARY & LOAD DATA
@@ -576,6 +612,8 @@ print("✅ Semua library berhasil di-import!")
 
 ### Langkah 2: Load Dataset Titanic
 
+Sekarang kita akan load Titanic dataset dari Seaborn. Dataset ini berisi informasi tentang 891 penumpang Titanic, dan kita akan memprediksi siapa yang selamat berdasarkan fitur seperti age, gender, class, etc. Mari kita load dataset dan lihat struktur datanya:
+
 ```python
 # ============================================
 # STEP 2: LOAD TITANIC DATASET
@@ -594,6 +632,8 @@ print(df.columns.tolist())
 ```
 
 ### Langkah 3: Exploratory Data Analysis (EDA)
+
+Sebelum membuat model, kita harus memahami data kita terlebih dahulu. Langkah ini disebut Exploratory Data Analysis (EDA). Kita akan melihat tipe data, missing values, dan distribusi target variable. Mari kita lakukan EDA:
 
 ```python
 # ============================================
@@ -634,6 +674,8 @@ plt.show()
 ```
 
 ### Langkah 4: Data Cleaning & Preprocessing
+
+Data yang kita dapat dari dunia nyata tidak selalu sempurna - ada missing values, data yang tidak konsisten, dan kolom yang tidak relevan. Langkah Data Cleaning adalah tahap krusial untuk memastikan data kita berkualitas sebelum training model. Mari kita clean dan preprocess data:
 
 ```python
 # ============================================
@@ -690,6 +732,8 @@ print(df_clean.head())
 
 ### Langkah 5: Siapkan Data untuk Model
 
+Sebelum training model, kita harus memisahkan features (X) dan target (y), lalu split data menjadi training dan testing set. Training set digunakan untuk melatih model, sedangkan testing set digunakan untuk evaluasi performa model yang belum pernah dilihat sebelumnya. Mari kita siapkan data:
+
 ```python
 # ============================================
 # STEP 5: PERSIAPAN DATA
@@ -730,6 +774,8 @@ print("✅ Feature scaling selesai!")
 
 ### Langkah 6: Training Model Pertama (Baseline)
 
+Untuk mengawali, kita akan training model paling sederhana: Logistic Regression. Model ini akan menjadi baseline kita untuk membandingkan dengan model yang lebih complex. Baseline penting karena memberikan referensi minimum yang harus dilampaui oleh model lain. Mari kita train model baseline:
+
 ```python
 # ============================================
 # STEP 6: BASELINE MODEL
@@ -755,6 +801,8 @@ print(classification_report(y_test, y_pred_baseline,
 ```
 
 ### Langkah 7: Bandingkan Beberapa Model
+
+Sekarang kita akan mencoba beberapa model berbeda dan membandingkan performa mereka. Dengan membandingkan multiple models, kita dapat menemukan model mana yang paling cocok untuk problem kita. Kita akan menggunakan 5-Fold Cross Validation untuk mendapatkan estimasi performa yang lebih reliable. Mari kita bandingkan:
 
 ```python
 # ============================================
@@ -793,6 +841,8 @@ plt.show()
 
 ### Langkah 8: Training Model Terbaik
 
+Berdasarkan perbandingan di langkah sebelumnya, kita sudah mengetahui model mana yang memiliki performa terbaik. Sekarang kita akan training model terbaik (Random Forest) dengan data training lengkap, dan kemudian evaluasi dengan data testing:
+
 ```python
 # ============================================
 # STEP 8: TRAIN MODEL TERBAIK
@@ -818,6 +868,8 @@ print(classification_report(y_test, y_pred_final,
 ```
 
 ### Langkah 9: Visualisasi Hasil
+
+Untuk memahami hasil prediksi model lebih baik, kita perlu membuat visualisasi. Confusion Matrix menunjukkan jenis kesalahan yang dilakukan model, sedangkan Feature Importance menunjukkan fitur mana yang paling berpengaruh dalam prediksi. Mari kita visualisasi hasil model:
 
 ```python
 # ============================================
@@ -856,6 +908,8 @@ for i in indices:
 ```
 
 ### Langkah 10: Coba Prediksi Data Baru
+
+Sekarang yang paling menyenangkan - menggunakan model yang sudah dilatih untuk memprediksi data baru! Kita akan membuat beberapa contoh penumpang baru dan melihat apakah model memprediksi mereka selamat atau tidak. Kita juga akan melihat confidence (probabilitas) dari setiap prediksi:
 
 ```python
 # ============================================
@@ -900,6 +954,8 @@ for i, (desc, pred, prob) in enumerate(zip(deskripsi, predictions, probabilities
 ---
 
 ## 💾 Menyimpan Model (Opsional)
+
+Setelah training model dan mendapatkan hasil yang baik, kita mungkin ingin menyimpan model untuk digunakan kemudian. Dengan joblib, kita bisa menyimpan model dan semua preprocessing objects (seperti scaler) dalam file pickle. Mari kita simpan model:
 
 ```python
 # Simpan model jika ingin digunakan nanti

@@ -122,6 +122,8 @@ print(int(nilai))           # 9 - desimalnya dihapus (tidak dibulatkan, tapi dip
 
 ### Membuat String
 
+String adalah sequence of characters. Di Python, kita bisa membuat string menggunakan single quotes, double quotes, atau triple quotes untuk multiline strings. Mari kita lihat berbagai cara membuat string:
+
 ```python
 # Dengan kutip tunggal atau ganda
 nama1 = 'Faaza'
@@ -162,6 +164,8 @@ print(len(nama_lengkap))  # 14 - termasuk spasi
 
 ### String Formatting
 
+String formatting memungkinkan kita menggunakan placeholder dalam string dan mengganti placeholder dengan nilai-nilai actual. Ada beberapa cara formatting di Python - kita bisa menggunakan format() method atau f-strings (lebih modern). Mari kita lihat string formatting:
+
 ```python
 nama = "Faaza"
 umur = 25
@@ -176,6 +180,8 @@ print(pesan2)
 ```
 
 ### String Methods
+
+Python menyediakan banyak built-in methods untuk memanipulasi string - uppercase, lowercase, replace, split, join, dan banyak lagi. Menguasai string methods akan membuat pekerjaan dengan text data jauh lebih mudah. Mari kita lihat string methods:
 
 ```python
 teks = "  Hello World  "
