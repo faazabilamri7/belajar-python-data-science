@@ -7,7 +7,7 @@ description: Informasi tentang kelas Data Science dan mentor
 
 <div style="text-align: center; margin: 2rem 0;">
 
-![Faaza Bil Amri - Data Scientist](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face)
+![Faaza Bil Amri - Data Scientist](https://media.licdn.com/dms/image/v2/D5603AQFOzkv3gMCm5g/profile-displayphoto-shrink_200_200/B56ZXY7oH_HQAk-/0/1743101265314?e=2147483647&v=beta&t=kA8AAFeqX-d6CoMXy5AKpRvtGvUxWAPfv7YjdDPvDWM)
 
 </div>
 

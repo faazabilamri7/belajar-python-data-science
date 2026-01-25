@@ -1,0 +1,139 @@
+---
+title: Manipulasi Data dengan Pandas & NumPy
+description: Menguasai library utama untuk pengolahan data tabular dan komputasi numerik
+sidebar:
+  order: 1
+---
+
+## 🎯 Tujuan Pembelajaran
+
+![Data Analysis](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop)
+_Ilustrasi: Pandas dan NumPy adalah fondasi pengolahan data di Python_
+
+Setelah mempelajari materi ini, kamu akan mampu:
+
+- ✅ Memahami struktur data NumPy Array
+- ✅ Membuat dan memanipulasi DataFrame Pandas
+- ✅ Melakukan operasi dasar pada data tabular
+- ✅ Mengakses, memfilter, dan mengubah data
+
+---
+
+## 📚 Daftar Materi
+
+Materi Pertemuan 3 dibagi menjadi beberapa bagian:
+
+### [1. NumPy Fundamentals](/docs/pertemuan-3/numpy-fundamentals/)
+- Apa itu NumPy
+- Membuat dan manipulasi arrays
+- Operasi matematika dan indexing
+
+### [2. NumPy Advanced](/docs/pertemuan-3/numpy-advanced/)
+- Reshape dan broadcasting
+- Boolean indexing
+- Operasi statistik
+
+### [3. Pandas Series](/docs/pertemuan-3/pandas-series/)
+- Apa itu Series
+- Membuat dan mengakses Series
+- Operasi pada Series
+
+### [4. Pandas DataFrame Basics](/docs/pertemuan-3/pandas-dataframe-basics/)
+- Membuat DataFrame
+- Membaca file CSV
+- Eksplorasi data awal
+
+### [5. DataFrame Manipulation](/docs/pertemuan-3/dataframe-manipulation/)
+- Mengakses data (loc, iloc)
+- Filtering dan sorting
+- Modifikasi kolom dan baris
+
+### [6. Data Operations & Joining](/docs/pertemuan-3/data-operations/)
+- Agregasi dan groupby
+- Menggabungkan data (merge, concat)
+- Menyimpan data
+
+### [7. Project & Latihan](/docs/pertemuan-3/project-latihan/)
+- Mini projects
+- Challenge problems
+- Best practices
+
+---
+
+## 📝 Ringkasan
+
+### Talking Points Hari Ini
+
+| Topik                     | Penjelasan                                           |
+| ------------------------- | ---------------------------------------------------- |
+| Array vs List (NumPy)     | NumPy Array lebih cepat dan efisien untuk komputasi numerik dibanding Python List |
+| Series & DataFrame (Pandas) | Series = Array 1D dengan label, DataFrame = Tabel 2D (seperti Excel) |
+| Filtering, Sorting, & Grouping | `df[df['col'] > 5]`, `df.sort_values()`, `df.groupby()` |
+| Joins & Merging Data      | `pd.merge()`, `pd.concat()`, `df.join()` untuk menggabungkan data |
+
+---
+
+## 🚀 Quick Start
+
+```python
+import pandas as pd
+import numpy as np
+
+# NumPy: create array
+arr = np.array([1, 2, 3, 4, 5])
+print(arr.mean())  # 3.0
+
+# Pandas: create DataFrame
+df = pd.DataFrame({
+    'nama': ['Andi', 'Budi', 'Citra'],
+    'nilai': [85, 90, 78]
+})
+print(df.describe())  # statistik
+```
+
+---
+
+:::tip[Setup Environment]
+**Google Colab (Recommended):**
+NumPy dan Pandas sudah terinstall! Langsung import dan gunakan.
+
+**Local Setup:**
+```bash
+pip install pandas numpy
+```
+:::
+
+---
+
+## ✏️ Latihan Cepat
+
+Coba jalankan code ini di Google Colab:
+
+```python
+import pandas as pd
+import numpy as np
+
+# NumPy
+print("=== NumPy ===")
+arr = np.array([1, 2, 3, 4, 5])
+print(f"Array: {arr}")
+print(f"Mean: {arr.mean()}")
+print(f"Sum: {arr.sum()}")
+
+# Pandas
+print("\n=== Pandas ===")
+data = {
+    'nama': ['Faaza', 'Budi', 'Citra'],
+    'umur': [25, 23, 22],
+    'nilai': [85, 90, 88]
+}
+df = pd.DataFrame(data)
+print(df)
+print(f"\nRata-rata nilai: {df['nilai'].mean()}")
+```
+
+---
+
+:::note[Catatan]
+Pertemuan ini mengenalkan dua library terpenting untuk data science. Kuasai keduanya dengan praktik berulang-ulang. Jangan langsung hafal, pahami konsepnya dulu.
+:::

@@ -1,0 +1,274 @@
+---
+title: Visualisasi Data
+description: Membuat visualisasi data yang informatif dan menarik dengan Python
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## 📊 Daftar Materi Pertemuan 6
+
+Pertemuan ini membahas seni dan sains dari data visualization. Visualisasi yang baik tidak hanya menarik, tapi juga mengkomunikasikan insight dengan jelas. Pilih topik yang ingin dipelajari:
+
+| Halaman | Topik | Durasi |
+| ------- | ----- | ------ |
+| 📈 **[Matplotlib Basics](./matplotlib-basics.md)** | Line, Scatter, Bar, Histogram plots | 50 min |
+| 🎨 **[Matplotlib Advanced](./matplotlib-advanced.md)** | Pie, Box, Subplots, Customization | 50 min |
+| 📊 **[Seaborn Fundamentals](./seaborn-fundamentals.md)** | Distribution & Categorical plots | 50 min |
+| 🔥 **[Seaborn Advanced](./seaborn-advanced.md)** | Relational, Heatmap, Pairplot, FacetGrid | 60 min |
+| 🎯 **[Chart Selection Guide](./chart-selection.md)** | Memilih visualisasi yang tepat | 40 min |
+| 💼 **[Projects & Real Data](./projects.md)** | Real-world visualization projects | 90 min |
+
+---
+
+## 🎯 Tujuan Pembelajaran
+
+Setelah menyelesaikan pertemuan ini, kamu akan mampu:
+
+- ✅ **Membuat visualisasi dasar** dengan Matplotlib (line, scatter, bar, histogram)
+- ✅ **Membuat visualisasi lanjutan** (pie, box, subplot, customization)
+- ✅ **Menggunakan Seaborn** untuk statistical plots yang cantik
+- ✅ **Membuat relational plots** (scatter, line, heatmap, pairplot)
+- ✅ **Memilih chart yang tepat** untuk berbagai jenis data & pertanyaan
+- ✅ **Menganalisis data** melalui visualisasi exploratory
+- ✅ **Mengkomunikasikan insights** dengan visualisasi yang efektif
+
+---
+
+## 🎓 Talking Points
+
+Topik-topik utama yang akan kita pelajari:
+
+| Topik | Penjelasan | Tools |
+| ----- | ---------- | ----- |
+| **Matplotlib Fundamentals** | Library dasar untuk plotting di Python | plt.plot(), plt.scatter(), plt.bar() |
+| **Distribution Visualization** | Histogram, KDE, Box plot untuk understand data distribution | plt.hist(), sns.kdeplot() |
+| **Categorical Comparison** | Bar plot, count plot, box plot untuk compare categories | sns.barplot(), sns.boxplot() |
+| **Relational Analysis** | Scatter, line plot untuk find relationships | sns.scatterplot(), plt.plot() |
+| **Correlation Heatmap** | Visualize correlation matrix | sns.heatmap() |
+| **Pairplot & Multivariate** | See all pairwise relationships | sns.pairplot(), sns.FacetGrid() |
+| **Chart Selection** | Choosing right visualization for data | Visual encoding, chart type matching |
+| **EDA Workflow** | Systematic exploratory data analysis | Combine multiple visualizations |
+
+---
+
+## 💡 Mengapa Visualisasi Data Penting?
+
+### Anscombe's Quartet: The Power of Visualization
+
+Empat dataset ini memiliki **statistik yang SAMA**:
+- Mean X = 9.0, Mean Y = 7.5
+- Variance X = 11, Variance Y = 4.1
+- Correlation = 0.816
+
+Tapi ketika divisualisasikan, **semua terlihat BERBEDA!**
+
+![Anscombe's Quartet](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/800px-Anscombe%27s_quartet_3.svg.png)
+
+**Lesson**: Statistik saja tidak cukup - **VISUALISASI ESSENTIAL untuk understand data!**
+
+### Visualisasi Membantu Kita:
+
+📊 **Memahami data dengan cepat** - Pola visible dalam seconds, tidak perlu baca rows
+
+🔍 **Menemukan outliers & anomalies** - Mudah spot data points yang unusual
+
+📢 **Mengkomunikasikan findings** - Stakeholder lebih paham dari visualisasi daripada tabel
+
+🎯 **Membuat keputusan berbasis data** - Visual evidence lebih convincing
+
+---
+
+## 🚀 Quick Start
+
+### Setup Libraries
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Configure styling
+sns.set_theme(style="whitegrid")
+plt.rcParams['figure.figsize'] = (10, 6)
+plt.rcParams['font.size'] = 11
+
+# Check versions
+print(f"Matplotlib: {plt.__version__}")
+print(f"Seaborn: {sns.__version__}")
+```
+
+### Load Sample Data
+
+```python
+# Built-in datasets dari Seaborn
+tips = sns.load_dataset('tips')
+iris = sns.load_dataset('iris')
+flights = sns.load_dataset('flights')
+
+# Preview
+print(tips.head())
+print(tips.info())
+print(tips.describe())
+```
+
+---
+
+## 📝 Catatan Penting
+
+<Aside type="caution">
+**Jangan lupa!** Visualisasi yang baik adalah yang menjawab pertanyaan spesifik tanpa perlu banyak explanation. Jika stakeholder butuh 5 menit untuk understand chart = chart itu gagal komunikasi!
+
+Keep it simple. Remove visual clutter. Focus on the message.
+</Aside>
+
+<Aside type="tip">
+**Pro Tips:**
+1. Selalu visualisasi data terlebih dahulu sebelum analisis statistik
+2. Gunakan multiple visualizations untuk verify findings
+3. Hindari chart types yang misleading (distorted axes, 3D pie charts)
+4. Consistency dalam colors & fonts across all charts
+5. Add context: title, labels, legend yang jelas
+</Aside>
+
+---
+
+## 📚 Matplotlib vs Seaborn
+
+### Kapan Gunakan Masing-masing?
+
+| Aspect | Matplotlib | Seaborn |
+| ------ | ---------- | ------- |
+| **Learning Curve** | Steeper (lebih verbose) | Gentler (simpler API) |
+| **Customization** | Sangat flexible | Less flexible |
+| **Default Aesthetics** | Basic/plain | Beautiful defaults |
+| **Statistical Plots** | Perlu coding manual | Built-in (histplot, boxplot, etc) |
+| **Pandas Integration** | Limited | Excellent |
+| **Use Case** | Fine-grained control | Quick EDA & reporting |
+
+### Best Practice
+
+**Hybrid approach:**
+- Use **Seaborn** untuk quick visualization & EDA
+- Use **Matplotlib** untuk fine-tuning & customization
+- Combine both untuk best results!
+
+```python
+# Seaborn plot base + Matplotlib customization
+sns.scatterplot(data=df, x='x', y='y', hue='category')
+plt.title('My Custom Title', fontsize=16, fontweight='bold')
+plt.ylabel('Y Axis Label', fontsize=12)
+```
+
+---
+
+## 🎨 Visualization Principles (Gestalt Laws)
+
+### 1. Proximity
+Points positioned close together appear as a group
+
+### 2. Similarity
+Objects with similar colors/shapes appear related
+
+### 3. Continuity
+Eyes follow smooth curves/lines
+
+### 4. Closure
+Brain completes incomplete shapes
+
+### 5. Figure-Ground
+Ability to separate foreground (chart) from background
+
+**Application in data viz:**
+- Group related data dengan positioning
+- Use color consistently (same color = same category)
+- Make trend lines smooth
+- Use grid sparingly (tidak overpower data)
+
+---
+
+## 🔗 Learning Path
+
+### Recommended Day-by-Day
+
+**Day 1: Foundation**
+- Basic plots (line, scatter, bar)
+- Hands-on: Create 5 different basic plots
+
+**Day 2: Distributions & Categories**
+- Histogram, box plot, violin plot
+- Bar, count plot untuk categorical
+- Hands-on: Explore dataset distribution
+
+**Day 3: Matplotlib Advanced**
+- Subplots, figure sizing
+- Customization (colors, markers, styles)
+- Hands-on: Create publication-quality plots
+
+**Day 4: Seaborn for Statistics**
+- Distribution plots, categorical plots
+- Relational plots dengan multiple dimensions
+- Hands-on: Statistical exploration
+
+**Day 5: Advanced & Real Data**
+- Heatmap, pairplot, facetgrid
+- EDA workflow
+- Real-world projects
+
+---
+
+## ✨ Next Steps
+
+Pilih salah satu untuk mulai:
+
+1. 👉 **Baru ke data viz?** → Mulai dengan [Matplotlib Basics](./matplotlib-basics.md)
+2. 🎨 **Sudah tahu plotting?** → Langsung ke [Seaborn Fundamentals](./seaborn-fundamentals.md)
+3. 🎯 **Bingung chart apa pakai?** → Ke [Chart Selection Guide](./chart-selection.md)
+4. 💼 **Ingin real practice?** → Ke [Projects & Real Data](./projects.md)
+
+---
+
+## 📊 Chart Types Overview
+
+Berbagai jenis chart untuk berbagai data & pertanyaan:
+
+```
+┌─ UNIVARIATE (1 variabel)
+│  ├─ Distribution: Histogram, KDE, Box plot, Violin plot
+│  ├─ Frequency: Count plot, Bar chart
+│  └─ Composition: Pie chart, Donut chart
+│
+├─ BIVARIATE (2 variabel)
+│  ├─ Numeric-Numeric: Scatter, Line, 2D Density
+│  ├─ Numeric-Categorical: Box, Violin, Bar (grouped)
+│  └─ Categorical-Categorical: Heatmap, Grouped bar
+│
+└─ MULTIVARIATE (3+ variabel)
+   ├─ Color, Size, Shape for additional dimensions
+   ├─ Facets/Subplots: FacetGrid, small multiples
+   └─ Pairplot: All pairwise relationships
+```
+
+Lebih detail ada di [Chart Selection Guide](./chart-selection.md)
+
+---
+
+## 🔗 Referensi Cepat
+
+### Matplotlib
+- [Official Documentation](https://matplotlib.org/)
+- [API Reference](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html)
+
+### Seaborn
+- [Official Documentation](https://seaborn.pydata.org/)
+- [Gallery](https://seaborn.pydata.org/examples.html)
+
+### Color Palettes
+- [Seaborn Palettes](https://seaborn.pydata.org/tutorial/color_palettes.html)
+- [Colorbrewer](https://colorbrewer2.org/)
+
+### General Data Visualization
+- [Edward Tufte's Principles](https://www.edwardtufte.com/)
+- [Stephen Few - Data Visualization](https://www.perceptualedge.com/)

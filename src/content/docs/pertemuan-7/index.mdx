@@ -1,0 +1,244 @@
+---
+title: Machine Learning Fundamentals
+description: Pengenalan Machine Learning, jenis-jenis algoritma, dan workflow
+sidebar:
+  order: 1
+---
+
+## 🎯 Tujuan Pembelajaran
+
+Setelah mempelajari modul ini, kamu akan mampu:
+
+- ✅ Memahami konsep dasar Machine Learning
+- ✅ Membedakan jenis-jenis Machine Learning (Supervised, Unsupervised, Reinforcement)
+- ✅ Mengenal algoritma-algoritma populer dan kapan menggunakannya
+- ✅ Memahami workflow Machine Learning end-to-end
+- ✅ Melakukan training-testing cycle dengan benar
+- ✅ Mengevaluasi model dengan berbagai metrik
+
+---
+
+## 📚 Struktur Pembelajaran
+
+| Halaman | Topik | Focus |
+| ------- | ----- | ----- |
+| **1. Fundamentals** | Konsep dasar ML, jenis-jenis | Teori & definisi |
+| **2. ML Algorithms** | Algoritma supervised & unsupervised | Algoritma populer |
+| **3. Scikit-Learn Basics** | Library ML Python | Praktik dengan sklearn |
+| **4. Data Preparation** | Preprocessing & feature engineering | Data readiness |
+| **5. Model Evaluation** | Metrics, cross-validation, overfitting | Performance assessment |
+| **6. Classification Deep Dive** | Classification algorithms & tuning | Classification workflow |
+| **7. Projects** | Real-world projects & challenges | End-to-end application |
+
+---
+
+## 🎯 Learning Path
+
+```
+┌─ Fundamentals ────────────────────────┐
+│ • Apa itu ML? Mengapa penting?        │
+│ • Supervised vs Unsupervised          │
+│ • Regression vs Classification        │
+│ • Workflow ML (10 steps)              │
+└──────────────────────────┬────────────┘
+                           ↓
+┌─ Algorithms & Tools ──────────────────┐
+│ • Popular algorithms                  │
+│ • Scikit-learn library                │
+│ • Quick starter example               │
+└──────────────────────────┬────────────┘
+                           ↓
+┌─ Data Preparation ───────────────────┐
+│ • Handling missing values             │
+│ • Encoding & scaling                  │
+│ • Feature engineering                 │
+│ • Train-test split                    │
+└──────────────────────────┬────────────┘
+                           ↓
+┌─ Training & Evaluation ──────────────┐
+│ • Model training                      │
+│ • Performance metrics                 │
+│ • Cross-validation                    │
+│ • Overfitting diagnosis               │
+└──────────────────────────┬────────────┘
+                           ↓
+┌─ Advanced Topics ────────────────────┐
+│ • Hyperparameter tuning              │
+│ • Real-world projects                │
+│ • Best practices                     │
+└────────────────────────────────────────┘
+```
+
+---
+
+## 🤖 Quick Start: ML Workflow
+
+Berikut adalah workflow machine learning yang akan kita gunakan untuk semua project:
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# 1. Load & Explore
+df = pd.read_csv('data.csv')
+print(df.head(), df.info(), df.describe())
+
+# 2. Prepare Data
+X = df.drop('target', axis=1)  # Features
+y = df['target']                # Target
+X = pd.get_dummies(X)           # Encode categorical
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 3. Split Data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. Train Model
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# 5. Evaluate
+y_pred = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print(classification_report(y_test, y_pred))
+```
+
+---
+
+## 🧠 Key Concepts at a Glance
+
+### Supervised vs Unsupervised
+
+```
+SUPERVISED LEARNING          UNSUPERVISED LEARNING
+─────────────────────        ─────────────────────
+Data: Labeled                Data: Unlabeled
+Goal: Predict                Goal: Find patterns
+Example: Spam detection      Example: Clustering
+
+Regression: Predict value    Clustering: Group data
+Classification: Predict cat  Dimensionality Reduction
+```
+
+### ML Workflow Overview
+
+```
+1. Define Problem
+        ↓
+2. Collect Data
+        ↓
+3. Explore & Clean (EDA)
+        ↓
+4. Feature Engineering
+        ↓
+5. Split (Train/Test)
+        ↓
+6. Train Model
+        ↓
+7. Evaluate
+        ↓
+8. Tune Hyperparameters
+        ↓
+9. Deploy
+```
+
+### Common Algorithms
+
+| Algorithm | Type | Use Case | Complexity |
+| --------- | ---- | -------- | ---------- |
+| Linear Regression | Regression | Simple continuous prediction | Low |
+| Logistic Regression | Classification | Binary/multiclass classification | Low |
+| Decision Tree | Classification | Interpretable decisions | Low |
+| Random Forest | Classification | Robust classification | Medium |
+| SVM | Classification | High-dimensional data | High |
+| K-Means | Clustering | Unsupervised grouping | Low |
+| Neural Networks | Deep Learning | Complex patterns | Very High |
+
+---
+
+## 📊 Talking Points - Pertemuan 7
+
+| Topik | Penjelasan |
+| ---- | --------- |
+| **What is ML?** | Komputer belajar pola dari data tanpa diprogram eksplisit |
+| **Supervised Learning** | Training dengan data berlabel (regresi atau klasifikasi) |
+| **Unsupervised Learning** | Menemukan pola dalam data tanpa label (clustering, dimensionality reduction) |
+| **Reinforcement Learning** | Belajar melalui reward dan punishment (game AI, robotics) |
+| **Train-Test Split** | Pisahkan data untuk training & testing agar tahu generalization |
+| **Overfitting** | Model menghafal training data, poor pada test data |
+| **Feature Engineering** | Buat fitur baru yang lebih informative dari fitur asli |
+| **Scikit-Learn** | Library ML Python dengan API konsisten untuk semua algoritma |
+
+---
+
+## 🎨 Principles to Remember
+
+### Occam's Razor Principle
+> "Simplest model that works is often the best choice"
+
+Mulai dari simple model → kalau perlu akurasi lebih → coba complex model.
+
+### Bias-Variance Tradeoff
+```
+Underfitting ← [Optimal] → Overfitting
+(High Bias)   (Good Fit)  (High Variance)
+```
+
+### No Free Lunch Theorem
+> "No single algorithm works best for all problems"
+
+Different problems butuh different algorithms. Eksperimen adalah kunci!
+
+---
+
+## ✏️ Persiapan untuk Pembelajaran
+
+### Tools yang Dibutuhkan
+
+```bash
+# Install packages
+pip install pandas numpy scikit-learn matplotlib seaborn
+```
+
+### Datasets untuk Practice
+
+- **Iris**: Classification - built-in scikit-learn
+- **Titanic**: Classification - Kaggle
+- **Boston Housing**: Regression - built-in
+- **MNIST**: Image classification - scikit-learn
+
+### Google Colab Setup
+
+```python
+# Di Google Colab, semua sudah terinstall
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+```
+
+---
+
+## 🚀 Next Steps
+
+1. **Start with Fundamentals** - Pahami konsep dasar
+2. **Learn Algorithms** - Ketahui kapan memakai apa
+3. **Practice with Scikit-Learn** - Hands-on coding
+4. **Prepare Data** - Belajar preprocessing
+5. **Evaluate Models** - Ukur performance dengan benar
+6. **Real Projects** - Apply ke real-world problems
+7. **Advanced Topics** - Hyperparameter tuning, ensemble methods
+
+---
+
+## 📖 Referensi
+
+- [Scikit-Learn Documentation](https://scikit-learn.org/)
+- [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course)
+- [Andrew Ng's Machine Learning Course](https://www.coursera.org/learn/machine-learning)
+- [Fast.ai Practical Deep Learning](https://course.fast.ai/)

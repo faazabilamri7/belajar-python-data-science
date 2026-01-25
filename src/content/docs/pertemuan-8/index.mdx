@@ -1,0 +1,322 @@
+---
+title: Building ML Models
+description: Membangun dan mengevaluasi model ML end-to-end
+sidebar:
+  order: 1
+---
+
+## 🎯 Tujuan Pembelajaran
+
+Setelah mempelajari modul ini, kamu akan mampu:
+
+- ✅ Membangun model ML end-to-end (load → prepare → train → evaluate)
+- ✅ Memahami berbagai metrik evaluasi (classification & regression)
+- ✅ Melakukan cross-validation untuk estimasi yang reliable
+- ✅ Melakukan hyperparameter tuning dengan GridSearch & RandomSearch
+- ✅ Menginterpretasi hasil model dan membuat keputusan bisnis
+- ✅ Menyelesaikan real-world projects dengan dataset nyata
+
+---
+
+## 📚 Struktur Pembelajaran
+
+| Halaman | Topik | Focus |
+| ------- | ----- | ----- |
+| **1. Index** | Overview & quick start | Persiapan & roadmap |
+| **2. ML Workflow** | End-to-end pipeline | Load → Prepare → Train → Evaluate |
+| **3. Classification Metrics** | Accuracy, Precision, Recall, F1, ROC | Classification evaluation |
+| **4. Regression Metrics** | MAE, MSE, RMSE, R² | Regression evaluation |
+| **5. Cross-Validation** | K-Fold, Stratified K-Fold, Cross-Validate | Better performance estimation |
+| **6. Hyperparameter Tuning** | GridSearchCV, RandomizedSearchCV | Optimize model parameters |
+| **7. Final Project** | Complete end-to-end project | Real-world application |
+
+---
+
+## 🚀 Quick Start: 5-Minute ML Model
+
+Ingin langsung membuat model? Ini 5-line code untuk training & evaluasi model:
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# 1. Load data
+X, y = load_iris(return_X_y=True)
+
+# 2. Split & train
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = RandomForestClassifier().fit(X_train, y_train)
+
+# 3. Evaluate
+print(f"Accuracy: {accuracy_score(y_test, model.predict(X_test)):.4f}")
+```
+
+**Output:** `Accuracy: 1.0000` ✅
+
+---
+
+## 🛠️ Setup: Google Colab vs Local
+
+### Google Colab (Recommended untuk Pemula)
+
+**Keuntungan:**
+- ✅ Free GPU/TPU
+- ✅ Semua library sudah terinstall
+- ✅ No setup needed
+- ✅ Save ke Google Drive otomatis
+
+**Cara:**
+1. Buka [colab.research.google.com](https://colab.research.google.com)
+2. Login dengan Google account
+3. Buat Notebook baru
+4. Mulai coding!
+
+```python
+# Cek apakah di Colab
+import sys
+print("In Colab:", 'google.colab' in sys.modules)
+```
+
+### Local Machine
+
+**Setup scikit-learn:**
+```bash
+pip install scikit-learn pandas numpy matplotlib seaborn
+```
+
+---
+
+## 📊 Dataset yang Akan Digunakan
+
+Kita akan menggunakan 3 dataset populer untuk practice:
+
+### 1. Iris Dataset (Classification)
+```python
+from sklearn.datasets import load_iris
+iris = load_iris()
+```
+- **Samples:** 150
+- **Features:** 4 (sepal, petal)
+- **Target:** 3 species
+- **Task:** Multi-class classification
+
+### 2. Titanic Dataset (Classification)
+```python
+import seaborn as sns
+df = sns.load_dataset('titanic')
+```
+- **Samples:** 891
+- **Features:** 11 (age, sex, class, dll)
+- **Target:** Survived (0/1)
+- **Task:** Binary classification
+
+### 3. California Housing (Regression)
+```python
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing()
+```
+- **Samples:** 20,640
+- **Features:** 8 (longitude, latitude, population, dll)
+- **Target:** House price
+- **Task:** Regression
+
+---
+
+## 🎯 Learning Path
+
+```
+WEEK 1-2: Fundamentals
+├─ Concepts (Pertemuan 7)
+└─ Algorithms (Pertemuan 7)
+
+WEEK 3-4: Building Models (This Week!)
+├─ Workflow & Preprocessing
+├─ Classification Metrics
+├─ Regression Metrics
+├─ Cross-Validation
+├─ Hyperparameter Tuning
+└─ Real-World Projects
+
+WEEK 5+: Advanced Topics
+├─ Ensemble Methods
+├─ Deep Learning
+├─ Time Series
+└─ NLP & Computer Vision
+```
+
+---
+
+## 💡 Key Concepts
+
+### 1. Train-Test Split
+
+**Why?** Evaluate pada data yang belum pernah dilihat model
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+# 80% training, 20% testing
+```
+
+### 2. Cross-Validation
+
+**Why?** Better estimate daripada single split
+
+```python
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(model, X, y, cv=5)
+print(f"Mean: {scores.mean():.4f} (+/- {scores.std():.4f})")
+```
+
+### 3. Evaluation Metrics
+
+**Classification:** Accuracy, Precision, Recall, F1, ROC-AUC
+**Regression:** MAE, MSE, RMSE, R²
+
+### 4. Overfitting vs Underfitting
+
+```
+Underfitting: High train error, High test error
+Good Fit: Low train error, Low test error ✅
+Overfitting: Very low train error, High test error
+```
+
+### 5. Hyperparameter Tuning
+
+**Goal:** Find optimal hyperparameters
+
+```python
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {'n_estimators': [50, 100, 200]}
+grid = GridSearchCV(model, param_grid, cv=5)
+grid.fit(X_train, y_train)
+print(grid.best_params_)
+```
+
+---
+
+## 📋 Complete ML Pipeline (Copy-Paste Ready)
+
+Berikut template lengkap yang bisa langsung dipakai untuk berbagai problem:
+
+```python
+# ============================================
+# TEMPLATE: Complete ML Pipeline
+# ============================================
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# 1. LOAD DATA
+df = pd.read_csv('data.csv')
+
+# 2. PREPARE
+X = df.drop('target', axis=1)
+y = df['target']
+X = pd.get_dummies(X)  # Encode categorical
+X = X.fillna(X.mean())  # Handle missing
+
+# 3. SPLIT
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. SCALE
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 5. TRAIN
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# 6. EVALUATE
+y_pred = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print(classification_report(y_test, y_pred))
+
+# 7. CROSS-VALIDATE (for reliability)
+scores = cross_val_score(model, X_train, y_train, cv=5)
+print(f"CV Score: {scores.mean():.4f} (+/- {scores.std():.4f})")
+```
+
+---
+
+## 🎯 Checklist: Sebelum Mulai
+
+- [ ] Install scikit-learn: `pip install scikit-learn`
+- [ ] Setup Jupyter notebook atau Google Colab
+- [ ] Download atau access dataset (Iris, Titanic, atau Housing)
+- [ ] Pahami konsep: train-test split, overfitting, metrics
+- [ ] Siapkan 2-3 jam untuk hands-on practice
+
+---
+
+## 📊 Topik yang Akan Dipelajari
+
+### Halaman 2: ML Workflow
+- Complete step-by-step pipeline
+- Load → Prepare → Train → Evaluate
+- Titanic dataset end-to-end example
+
+### Halaman 3: Classification Metrics
+- Confusion matrix interpretation
+- Accuracy, Precision, Recall, F1
+- ROC curve & AUC
+- When to use which metric
+
+### Halaman 4: Regression Metrics
+- MAE, MSE, RMSE
+- R² Score
+- Interpretation & comparison
+- Example: Housing price prediction
+
+### Halaman 5: Cross-Validation
+- Why cross-validation matters
+- K-Fold implementation
+- Stratified K-Fold
+- Cross-validate multiple metrics
+
+### Halaman 6: Hyperparameter Tuning
+- GridSearchCV tutorial
+- RandomizedSearchCV
+- Parameter grids
+- Best practices
+
+### Halaman 7: Final Project
+- Complete real-world project
+- Dataset selection
+- Step-by-step implementation
+- Submission guidelines
+
+---
+
+## 🔗 Referensi & Resources
+
+- [Scikit-Learn Documentation](https://scikit-learn.org/)
+- [Scikit-Learn Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
+- [Kaggle Competitions](https://www.kaggle.com/competitions)
+- [Google Colab FAQ](https://research.google.com/colaboratory/faq.html)
+
+---
+
+## 🚀 Siap? Mari Mulai!
+
+Pilih halaman favorit kamu:
+
+1. **Mau langsung praktik?** → Ke **Halaman 2: ML Workflow**
+2. **Mau pahami metrics dulu?** → Ke **Halaman 3: Classification Metrics**
+3. **Ada dataset tertentu?** → Ke **Halaman 7: Final Project**
+
+Mari kita mulai! 🎉

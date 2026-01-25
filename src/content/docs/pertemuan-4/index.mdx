@@ -1,0 +1,147 @@
+---
+title: EDA & Data Cleaning
+description: Teknik mengeksplorasi data dan membersihkan data untuk analisis
+sidebar:
+  order: 1
+---
+
+## 🎯 Tujuan Pembelajaran
+
+![Data Exploration](https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=400&fit=crop)
+_Ilustrasi: EDA membantu memahami data sebelum analisis lanjutan_
+
+Setelah mempelajari materi ini, kamu akan mampu:
+
+- ✅ Melakukan Exploratory Data Analysis (EDA)
+- ✅ Mengidentifikasi dan menangani missing values
+- ✅ Mendeteksi dan menangani outliers
+- ✅ Melakukan data transformation
+
+---
+
+## 📚 Daftar Materi
+
+Materi Pertemuan 4 dibagi menjadi beberapa bagian:
+
+### [1. EDA Fundamentals](/docs/pertemuan-4/eda-fundamentals/)
+- Apa itu EDA dan pentingnya
+- Load dan inspeksi data
+- Ringkasan statistik
+
+### [2. EDA Visualization](/docs/pertemuan-4/eda-visualization/)
+- Distribusi data
+- Analisis kategortikal
+- Korelasi dan relationships
+
+### [3. Missing Values Handling](/docs/pertemuan-4/missing-values/)
+- Identifikasi missing values
+- Strategi imputation
+- Best practices
+
+### [4. Outliers Detection & Handling](/docs/pertemuan-4/outliers/)
+- Metode deteksi (IQR, Z-Score)
+- Visualisasi outliers
+- Strategi handling
+
+### [5. Data Transformation](/docs/pertemuan-4/data-transformation/)
+- Type casting
+- Feature engineering dari datetime
+- String cleaning & binning
+
+### [6. Data Cleaning Pipeline](/docs/pertemuan-4/cleaning-pipeline/)
+- Template EDA lengkap
+- Data quality report
+- Checklist & best practices
+
+### [7. Projects & Advanced Cases](/docs/pertemuan-4/projects/)
+- Real-world EDA projects
+- Challenge problems
+- Advanced techniques
+
+---
+
+## 📝 Ringkasan
+
+### Talking Points Hari Ini
+
+| Topik                      | Penjelasan                                           |
+| -------------------------- | ---------------------------------------------------- |
+| Identifikasi Missing Values | `df.isnull().sum()`, visualisasi dengan heatmap     |
+| Penanganan Outliers        | Deteksi dengan IQR/Z-Score, handling: remove, cap, atau transform |
+| Data Type Casting          | `df['col'].astype()`, konversi tipe data yang sesuai |
+| Analisis Univariat & Bivariat | Univariat: distribusi 1 variabel, Bivariat: hubungan 2 variabel |
+
+---
+
+## 🚀 Quick Start
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = sns.load_dataset('titanic')
+
+# 1. Inspeksi dasar
+print(f"Shape: {df.shape}")
+print(df.head())
+print(df.info())
+
+# 2. Cek missing
+print(df.isnull().sum())
+
+# 3. Statistik
+print(df.describe())
+
+# 4. Visualisasi
+df.hist(figsize=(12, 10))
+plt.show()
+```
+
+---
+
+## ✏️ Latihan Cepat
+
+Coba jalankan ini di Google Colab:
+
+```python
+import pandas as pd
+import seaborn as sns
+
+# Load data
+df = sns.load_dataset('titanic')
+
+# 1. Berapa banyak rows dan columns?
+print(f"Shape: {df.shape}")
+
+# 2. Ada berapa missing values?
+print(f"\nMissing values:\n{df.isnull().sum()}")
+
+# 3. Statistik kolom numerik
+print(f"\nStatistik:\n{df.describe()}")
+
+# 4. Unique values per kategori
+print(f"\nUnique values:")
+print(f"Sex: {df['sex'].unique()}")
+print(f"Embarked: {df['embarked'].unique()}")
+```
+
+---
+
+:::tip[Setup Environment]
+**Google Colab (Recommended):**
+Semua library yang dibutuhkan sudah terinstall! Langsung gunakan kode di atas.
+
+**Local Setup:**
+```bash
+pip install pandas numpy matplotlib seaborn scipy
+```
+:::
+
+---
+
+:::note[Catatan]
+EDA dan Data Cleaning adalah 70-80% dari pekerjaan data scientist! Fase ini sangat penting untuk memahami data sebelum melakukan analisis lanjutan. Jangan terburu-buru - luangkan waktu untuk eksplorasi data dengan teliti.
+:::
