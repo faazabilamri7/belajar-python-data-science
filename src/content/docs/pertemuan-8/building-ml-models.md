@@ -987,6 +987,15 @@ files.download('titanic_scaler.pkl')
 
 ## 📝 Ringkasan
 
+### Talking Points Hari Ini
+
+| Topik                                   | Penjelasan                                           |
+| --------------------------------------- | ---------------------------------------------------- |
+| Implementasi Scikit-Learn               | `from sklearn import ...`, API yang konsisten (fit, predict, score) |
+| Evaluasi Matriks (Accuracy, Precision, Recall, MSE) | Accuracy = keseluruhan benar, Precision = tepat positif, Recall = tangkap semua positif |
+| Interpretasi Model                      | Feature importance, coefficients, decision boundaries |
+| Deployment Sederhana (Concept)          | Simpan model dengan joblib/pickle, load untuk prediksi |
+
 ### Classification Metrics
 
 | Metric    | Rumus          | Kapan Gunakan   |
@@ -995,7 +1004,6 @@ files.download('titanic_scaler.pkl')
 | Precision | TP/(TP+FP)     | FP costly       |
 | Recall    | TP/(TP+FN)     | FN costly       |
 | F1        | 2×P×R/(P+R)    | Imbalanced data |
-| AUC       | Area under ROC | Ranking ability |
 
 ### Regression Metrics
 
@@ -1005,14 +1013,6 @@ files.download('titanic_scaler.pkl')
 | MSE    | Average squared error     |
 | RMSE   | √MSE, same unit as target |
 | R²     | Variance explained        |
-
-### Best Practices
-
-1. ✅ Selalu gunakan cross-validation
-2. ✅ Pilih metrik sesuai problem
-3. ✅ Tune hyperparameters
-4. ✅ Cek feature importance
-5. ✅ Simpan model untuk deployment
 
 ---
 

@@ -587,11 +587,14 @@ plt.savefig('grafik.svg', bbox_inches='tight')  # Scalable
 
 ## 📝 Ringkasan
 
-| Library    | Kegunaan            | Kelebihan                |
-| ---------- | ------------------- | ------------------------ |
-| Matplotlib | Dasar, customizable | Fleksibel, kontrol penuh |
-| Seaborn    | Statistik           | Cantik, mudah            |
-| Plotly     | Interaktif          | Web-ready, zoom          |
+### Talking Points Hari Ini
+
+| Topik                            | Penjelasan                                           |
+| -------------------------------- | ---------------------------------------------------- |
+| Matplotlib vs Seaborn            | Matplotlib = dasar & fleksibel, Seaborn = cantik & mudah |
+| Jenis Grafik (Bar, Line, Scatter, Boxplot) | Bar = kategori, Line = trend, Scatter = hubungan, Boxplot = distribusi |
+| Prinsip Design (Gestalt)         | Proximity, similarity, closure, continuity untuk visualisasi efektif |
+| Kustomisasi Plot (Label, Legend, Title) | `plt.xlabel()`, `plt.legend()`, `plt.title()` untuk plot informatif |
 
 ### Chart Cheat Sheet
 

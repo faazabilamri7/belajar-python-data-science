@@ -568,24 +568,22 @@ def plot_eda(df, target=None):
 
 ## 📝 Ringkasan
 
-### EDA Checklist
+### Talking Points Hari Ini
+
+| Topik                      | Penjelasan                                           |
+| -------------------------- | ---------------------------------------------------- |
+| Identifikasi Missing Values | `df.isnull().sum()`, visualisasi dengan heatmap     |
+| Penanganan Outliers        | Deteksi dengan IQR/Z-Score, handling: remove, cap, atau transform |
+| Data Type Casting          | `df['col'].astype()`, konversi tipe data yang sesuai |
+| Analisis Univariat & Bivariat | Univariat: distribusi 1 variabel, Bivariat: hubungan 2 variabel |
+
+### Checklist EDA & Cleaning
 
 - [ ] Load dan inspeksi data (shape, dtypes, head)
-- [ ] Cek missing values
-- [ ] Cek duplikat
-- [ ] Statistik deskriptif (describe)
-- [ ] Distribusi variabel numerik
-- [ ] Frekuensi variabel kategorikal
-- [ ] Korelasi antar variabel
-- [ ] Identifikasi outliers
-
-### Data Cleaning Checklist
-
-- [ ] Handle missing values
-- [ ] Remove duplicates
-- [ ] Handle outliers
+- [ ] Cek dan tangani missing values
+- [ ] Deteksi dan tangani outliers
 - [ ] Fix data types
-- [ ] Standardize formats
+- [ ] Analisis univariat dan bivariat
 - [ ] Feature engineering
 
 ---

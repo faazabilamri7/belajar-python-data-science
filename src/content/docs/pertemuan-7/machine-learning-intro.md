@@ -565,6 +565,15 @@ plt.show()
 
 ## 📝 Ringkasan
 
+### Talking Points Hari Ini
+
+| Topik                        | Penjelasan                                           |
+| ---------------------------- | ---------------------------------------------------- |
+| Supervised vs Unsupervised   | Supervised = data berlabel (prediksi), Unsupervised = tanpa label (clustering) |
+| Alur ML (Split, Train, Test) | Split data → Train model → Test & evaluasi performa  |
+| Regresi vs Klasifikasi       | Regresi = prediksi nilai kontinu, Klasifikasi = prediksi kategori |
+| Overfitting & Underfitting   | Overfitting = terlalu hafal data, Underfitting = terlalu sederhana |
+
 ### ML Types
 
 | Type          | Data        | Tujuan          | Contoh         |
@@ -573,24 +582,9 @@ plt.show()
 | Unsupervised  | Unlabeled   | Find patterns   | Clustering     |
 | Reinforcement | Environment | Maximize reward | Game AI        |
 
-### Supervised Learning
-
-| Problem        | Output     | Contoh           |
-| -------------- | ---------- | ---------------- |
-| Regression     | Continuous | Price prediction |
-| Classification | Categories | Spam/Not Spam    |
-
 ### ML Workflow
 
-1. Define Problem
-2. Collect Data
-3. EDA & Cleaning
-4. Feature Engineering
-5. Train-Test Split
-6. Train Model
-7. Evaluate
-8. Tune
-9. Deploy
+1. Define Problem → 2. Collect Data → 3. EDA & Cleaning → 4. Feature Engineering → 5. Train-Test Split → 6. Train Model → 7. Evaluate → 8. Tune → 9. Deploy
 
 ---
 

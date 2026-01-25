@@ -261,12 +261,14 @@ from sklearn.ensemble import RandomForestClassifier
 
 ## 📝 Ringkasan
 
-| Konsep         | Penjelasan                                               |
-| -------------- | -------------------------------------------------------- |
-| Data Science   | Mengekstrak insights dari data menggunakan metode ilmiah |
-| Data Scientist | Membangun model prediktif dari data                      |
-| CRISP-DM       | Framework standar dengan 6 fase                          |
-| Tools          | Python, Pandas, Scikit-learn, Jupyter                    |
+### Talking Points Hari Ini
+
+| Topik                       | Penjelasan                                                                 |
+| --------------------------- | -------------------------------------------------------------------------- |
+| Definisi Data Science, AI & ML | Data Science mengekstrak insights dari data, AI membuat mesin cerdas, ML melatih model dari data |
+| Karir di Bidang Data        | Data Analyst, Data Engineer, Data Scientist, ML Engineer                   |
+| Workflow Proyek Data        | CRISP-DM: Business Understanding → Data Understanding → Preparation → Modeling → Evaluation → Deployment |
+| Etika Data dan Privasi      | Penggunaan data yang bertanggung jawab, menjaga privasi pengguna           |
 
 ---
 

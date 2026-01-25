@@ -575,20 +575,14 @@ print(df['angkatan'].value_counts().sort_index())
 
 ## 📝 Ringkasan
 
-| Library | Struktur Data | Kegunaan                 |
-| ------- | ------------- | ------------------------ |
-| NumPy   | Array         | Komputasi numerik cepat  |
-| Pandas  | Series        | Array 1D dengan label    |
-| Pandas  | DataFrame     | Tabel 2D (seperti Excel) |
+### Talking Points Hari Ini
 
-### Operasi Penting
-
-| Operasi   | NumPy                | Pandas                  |
-| --------- | -------------------- | ----------------------- |
-| Membuat   | `np.array()`         | `pd.DataFrame()`        |
-| Akses     | `arr[0]`, `arr[0:5]` | `df.loc[]`, `df.iloc[]` |
-| Filter    | `arr[arr > 5]`       | `df[df['col'] > 5]`     |
-| Statistik | `arr.mean()`         | `df['col'].mean()`      |
+| Topik                     | Penjelasan                                           |
+| ------------------------- | ---------------------------------------------------- |
+| Array vs List (NumPy)     | NumPy Array lebih cepat dan efisien untuk komputasi numerik dibanding Python List |
+| Series & DataFrame (Pandas) | Series = Array 1D dengan label, DataFrame = Tabel 2D (seperti Excel) |
+| Filtering, Sorting, & Grouping | `df[df['col'] > 5]`, `df.sort_values()`, `df.groupby()` |
+| Joins & Merging Data      | `pd.merge()`, `pd.concat()`, `df.join()` untuk menggabungkan data |
 
 ---
 

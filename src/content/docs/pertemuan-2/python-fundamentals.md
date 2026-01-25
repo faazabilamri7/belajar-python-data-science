@@ -619,15 +619,14 @@ print(kalkulator(10, 5, "/"))  # 2.0
 
 ## 📝 Ringkasan
 
-| Konsep     | Contoh                        |
-| ---------- | ----------------------------- |
-| Variabel   | `nama = "Faaza"`              |
-| Tipe Data  | `int`, `float`, `str`, `bool` |
-| List       | `[1, 2, 3]`                   |
-| Dictionary | `{"key": "value"}`            |
-| If-Else    | `if kondisi: ... else: ...`   |
-| For Loop   | `for i in range(5): ...`      |
-| Function   | `def nama_fungsi(): ...`      |
+### Talking Points Hari Ini
+
+| Topik                        | Contoh                                  |
+| ---------------------------- | --------------------------------------- |
+| Variabel & Tipe Data         | `nama = "Faaza"`, `int`, `float`, `str`, `bool` |
+| Struktur Data (List, Dictionary) | `[1, 2, 3]`, `{"key": "value"}`       |
+| Control Flow (If-Else, Loops) | `if kondisi: ...`, `for i in range(5): ...` |
+| Functions & Lambda           | `def fungsi(): ...`, `lambda x: x * 2`  |
 
 ---
 

@@ -507,14 +507,23 @@ print(df[['nilai', 'jam_belajar']].corr())
 
 ## 📝 Ringkasan
 
+### Talking Points Hari Ini
+
+| Topik                          | Penjelasan                                           |
+| ------------------------------ | ---------------------------------------------------- |
+| Ukuran Pemusatan (Mean, Median, Mode) | Mean = rata-rata, Median = nilai tengah, Mode = nilai terbanyak |
+| Distribusi Normal & Probabilitas | Bell curve, 68-95-99.7 rule, probabilitas kejadian  |
+| Hypothesis Testing (P-Value)   | Uji hipotesis statistik, p-value < 0.05 = signifikan |
+| Korelasi vs Kausalitas         | Korelasi ≠ kausalitas, Pearson r untuk ukur hubungan |
+
+### Rumus Penting
+
 | Konsep      | Rumus           | Penggunaan               |
 | ----------- | --------------- | ------------------------ |
 | Mean        | Σx/n            | Rata-rata, data normal   |
 | Median      | Nilai tengah    | Data skewed, ada outlier |
-| Mode        | Nilai terbanyak | Data kategorikal         |
 | Variance    | Σ(x-μ)²/n       | Ukuran penyebaran        |
 | Std Dev     | √Variance       | Penyebaran, satuan sama  |
-| Z-Score     | (x-μ)/σ         | Standardisasi            |
 | Correlation | Pearson r       | Hubungan 2 variabel      |
 
 ---
